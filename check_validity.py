@@ -40,13 +40,17 @@ def check_stability(n, matchings, hospital_prefs, student_prefs):
     for h, s in matchings:
         match_h[h] = s
         match_s[s] = h
+    
+    student_rankings ={}
+    for student, pref_list in student_prefs.items():
+        student_rankings[student] = {}
+        for index, hosp in enumerate(pref_list):
+            student_rankings[student][hosp] = index+1
 
-        """This allows lookups in O(1) time, which is better than iterating through the list in every iteration"""
+
+    """This allows lookups in O(1) time, which is better than iterating through the list in every iteration"""
 
     """
-    I will do this algorithm later
-
-
     Iterate over hospitals
     which ever the hospital is matched to, check students to the left.
     check students to the left, do they prefer this hospital over their current? 
@@ -58,5 +62,15 @@ def check_stability(n, matchings, hospital_prefs, student_prefs):
     then the matching is stable, and return True.
 
     """
+    for hospital, students in hospital_prefs.items():
+        current_match = match_h[hospital]
+        for student in students:
+            if student == current_match:
+                break
+            #if student has this hospital ranked better than their current match
+            if student_rankings[student][hospital] < student_rankings[student][match_s[student]]:
+                return (False, "UNSTABLE")
+            
+        
 
     return (True, "VALID STABLE")
