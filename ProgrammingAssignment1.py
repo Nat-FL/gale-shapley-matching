@@ -1,6 +1,7 @@
 import math
 import validity_check
 hospitals = {}
+hospitalsCheck = {}
 students = {}
 lineLengthIndex = 0
 lineIndex = 1
@@ -24,9 +25,12 @@ def setHospitals(currentLine, hospitalIndex):
 
     for element in currentLine:
         if (element != " "):
+            print("ELEMENTS: ", element)
             values.append(int(element))
 
     hospitals[hospitalIndex] = values
+    hospitalsCheck[hospitalIndex] = values
+    print("hospitalsCheck: ", hospitalsCheck)
 
 #set and update student dictionary with n students and preference list of each student
 def setStudents(currentLine, studentIndex):
@@ -146,6 +150,7 @@ with open("exampleData.txt") as file:
 
         lineIndex += 1
 
+print("HOSPITALS", hospitals)
 #gale-shapley implementation
 while checkPairSize(pairs) and checkHospitalPreferenceList(hospitals.get(currentHospital)):
 
@@ -188,10 +193,11 @@ def printSolution(pairs):
     for pair in pairs:
         print(pair[0], "", pair[1])
 
+    print("hospital check: ", hospitalsCheck)
     # stability = check_validity(int(n), pairs)
-    stability = validity_check.check_stability(int(n),pairs,hospitals, students)
+    stability = validity_check.check_stability(int(n),pairs,hospitalsCheck, students)
     print("stability status: ", stability)
 
-# print(hospitals)
-# print(students)
+# print("HOSPITALS", hospitals)
+print("STUDENTS", students)
 printSolution(pairs)
