@@ -147,7 +147,7 @@ with open("exampleData.txt") as file:
         lineIndex += 1
 
 #gale-shapley implementation
-while checkPairSize(pairs) & checkHospitalPreferenceList(hospitals.get(currentHospital)):
+while checkPairSize(pairs) and checkHospitalPreferenceList(hospitals.get(currentHospital)):
 
     #if hospital already paired skip over it
     if checkHospitalPairs(currentHospital):
