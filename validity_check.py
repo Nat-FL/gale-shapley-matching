@@ -49,21 +49,6 @@ def check_stability(n, matchings, hospital_prefs, student_prefs):
             student_rankings[student][hosp] = index+1
 
 
-    print("hospital matches: \n")
-    for hospital, match in match_h.items():
-        print(hospital, match)
-
-
-    print("\n\nstudent matches: \n ")
-    for student, match in match_s.items():
-        print(student, match)
-    print("\n\n\n")
-
-
-    print("student rankings\n")
-    for student, pref_list in student_rankings.items():
-        print(student, ": ", pref_list)
-    
 
 
     """This allows lookups in O(1) time, which is better than iterating through the list in every iteration"""
