@@ -1,4 +1,3 @@
-import ProgrammingAssignment1
 
 def check_validity(n, matching):
     if len(matching) > n:
@@ -62,7 +61,7 @@ def check_stability(n, matchings, hospital_prefs, student_prefs):
 
 
     print("student rankings\n")
-    for student, pref_list in student_rankings:
+    for student, pref_list in student_rankings.items():
         print(student, ": ", pref_list)
     
 

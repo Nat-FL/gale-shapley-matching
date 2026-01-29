@@ -1,5 +1,5 @@
 import math
-from check_validity import check_validity
+import validity_check
 hospitals = {}
 students = {}
 lineLengthIndex = 0
@@ -188,7 +188,8 @@ def printSolution(pairs):
     for pair in pairs:
         print(pair[0], "", pair[1])
 
-    stability = check_validity(int(n), pairs)
+    # stability = check_validity(int(n), pairs)
+    stability = validity_check.check_stability(int(n),pairs,hospitals, students)
     print("stability status: ", stability)
 
 # print(hospitals)
