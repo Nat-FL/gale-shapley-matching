@@ -1,3 +1,5 @@
+import ProgrammingAssignment1
+
 def check_validity(n, matching):
     if len(matching) > n:
         return (False, "INVALID (Not a one to one matching)")
@@ -48,6 +50,23 @@ def check_stability(n, matchings, hospital_prefs, student_prefs):
             student_rankings[student][hosp] = index+1
 
 
+    print("hospital matches: \n")
+    for hospital, match in match_h.items():
+        print(hospital, match)
+
+
+    print("\n\nstudent matches: \n ")
+    for student, match in match_s.items():
+        print(student, match)
+    print("\n\n\n")
+
+
+    print("student rankings\n")
+    for student, pref_list in student_rankings:
+        print(student, ": ", pref_list)
+    
+
+
     """This allows lookups in O(1) time, which is better than iterating through the list in every iteration"""
 
     """
@@ -62,6 +81,8 @@ def check_stability(n, matchings, hospital_prefs, student_prefs):
     then the matching is stable, and return True.
 
     """
+
+    
     for hospital, students in hospital_prefs.items():
         current_match = match_h[hospital]
         for student in students:
@@ -74,3 +95,5 @@ def check_stability(n, matchings, hospital_prefs, student_prefs):
         
 
     return (True, "VALID STABLE")
+
+
