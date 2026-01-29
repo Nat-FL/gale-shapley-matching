@@ -7,7 +7,7 @@ def check_validity(n, matching):
     students = set()
     hospitals = set()
     for h,s in matching:
-        if h<1 or s>n:
+        if h<1 or h>n:
             return (False, f"INVALID (Hospital {h} is out of range)")
         
         if s<1 or s>n:
