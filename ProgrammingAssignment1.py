@@ -29,7 +29,7 @@ def setHospitals(currentLine, hospitalIndex):
             values.append(int(element))
 
     hospitals[hospitalIndex] = values
-    hospitalsCheck[hospitalIndex] = values
+    hospitalsCheck[hospitalIndex] = list(values)
     print("hospitalsCheck: ", hospitalsCheck)
 
 #set and update student dictionary with n students and preference list of each student
