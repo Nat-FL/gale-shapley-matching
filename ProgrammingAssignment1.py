@@ -14,30 +14,53 @@ def run_matching():
     n = 0
     currentHospital = 1 #current hospital index
 
-    numLines = sum(1 for line in open("exampleData.txt")) #read in number of lines
+    numLines = sum(1 for line in open("test-files/example1.in")) #read in number of lines
     halfLines = math.ceil((numLines-2) / 2)
 
+    #handle a number that has more than single digit
+    def largeNumber(index, line):
+        number = ""
+        while index < len(line) and line[index] != " ":
+    
+            number += line[index]
+            index += 1
+    
+        return [number, index]
 
-    #set and update hospital dictionary with n hospitals and preference list of each hospital
+    #get and store each number from the current preference line
+    def getLineValues(currentLine):
+        values = []
+        i = 0
+    
+        while i < len(currentLine):
+            if (currentLine[i] != " " and i + 1 < len(currentLine) and currentLine[i + 1] != " "):
+                numberVal = largeNumber(i, currentLine)
+                values.append(int(numberVal[0]))
+    
+                i = numberVal[1]
+    
+            elif (currentLine[i] != " "):
+                values.append(int(currentLine[i]))
+                i += 1
+    
+            i += 1
+    
+        return values
+
+    #set and update the hospital dictionary
     def setHospitals(currentLine, hospitalIndex):
-        values = []
+        hospitalPreferenceList = getLineValues(currentLine)
 
-        for element in currentLine:
-            if (element != " "):
-                values.append(int(element))
+        #store preference list for each hospital
+        hospitals[hospitalIndex] = hospitalPreferenceList
+        hospitalsCheck[hospitalIndex] = list(hospitalPreferenceList)
 
-        hospitals[hospitalIndex] = values
-        hospitalsCheck[hospitalIndex] = list(values)
-
-    #set and update student dictionary with n students and preference list of each student
+    #set and update student dictionary
     def setStudents(currentLine, studentIndex):
-        values = []
 
-        for element in currentLine:
-            if (element != " "):
-                values.append(int(element))
-
-        students[studentIndex] = values
+        # store preference list for each student
+        studentPreferenceList = getLineValues(currentLine)
+        students[studentIndex] = studentPreferenceList
 
 
     #check if hospital already paired
@@ -123,8 +146,8 @@ def run_matching():
         else:
             return False
 
-    #get indices of student and hospital sets
-    with open("exampleData.txt") as file:
+    #get values of student and hospital preference lists
+    with open("test-files/example1.in") as file:
         for line in file:
 
             if lineIndex == 1:
