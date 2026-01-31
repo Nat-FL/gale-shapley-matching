@@ -1,7 +1,7 @@
 # Programming Assignment 1: Gale–Shapley Stable Matching
 
 ## Students
-Natahja Graddy - UFID: XXXX-XXXX
+Natahja Graddy - UFID: 6941-2034
 Nathan King - UFID: 7218-0427
 
 ## Build/Compilation Instructions
@@ -11,15 +11,16 @@ Build/Compilation not required, as this project is in Python.
 ProgrammingAssignment1.py: Runs Gale Shapley Algorithm.
 validity_check.py: Contains 2 functions, one for checking validity of output, one for checking stability of matchings.
 exampleData.txt: File to be read into GS Algorithm.
-output.txt: Matchings produced by GS.
+test-files: folder that contians example input and output files to check matcher and verifier
 
 
 ## Running the Matcher
 To generate a stable matching, run:
 
 ```bash
-python ProgrammingAssignment1.py exampleData.txt output.txt
+python ProgrammingAssignment1.py example1.in
 ```
+**Replace the (1) with numbers 1-4 to test other files. Expected output provided in test-files folder.
 
 ## Running the Verifier
 The verifier is implemented in `validity_check.py` as helper functions that
