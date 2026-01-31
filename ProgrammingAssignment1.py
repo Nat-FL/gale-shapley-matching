@@ -1,5 +1,6 @@
 def run_matching(verbose = True):
     import math
+    import sys
 
     hospitals = {}
     hospitalsCheck = {}
@@ -12,7 +13,10 @@ def run_matching(verbose = True):
     n = 0
     currentHospital = 1 #current hospital index
 
-    numLines = sum(1 for line in open("test-files/example1.in")) #read in number of lines
+    # read command line to get specific test file
+    testFile = "test-files/" + sys.argv[1]
+
+    numLines = sum(1 for line in open(testFile)) #read in number of lines
     halfLines = math.ceil((numLines-2) / 2)
 
     #handle a number that has more than single digit
@@ -150,7 +154,7 @@ def run_matching(verbose = True):
 
 
     #get values of student and hospital preference lists
-    with open("test-files/example1.in") as file:
+    with open(testFile) as file:
         for line in file:
 
             if lineIndex == 1:
