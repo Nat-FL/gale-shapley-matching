@@ -48,6 +48,5 @@ Python 3 is used for execution.
 2 2
 
 ### Gale-Shapley Runtime Graph
-
-
+![alt text](gale-shapley-running-time.png)
 
