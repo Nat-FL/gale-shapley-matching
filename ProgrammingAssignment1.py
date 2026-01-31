@@ -1,15 +1,13 @@
 def run_matching(verbose = True):
     import math
-    import validity_check
+
     hospitals = {}
     hospitalsCheck = {}
     students = {}
-    lineLengthIndex = 0
     lineIndex = 1
-    index = 1
     hospitalIndex = 1
     studentIndex = 1
-    lineValues = []
+    fileLinesIndex = 1
     pairs = []
     n = 0
     currentHospital = 1 #current hospital index
@@ -18,14 +16,15 @@ def run_matching(verbose = True):
     halfLines = math.ceil((numLines-2) / 2)
 
     #handle a number that has more than single digit
-    def largeNumber(index, line):
+    def multipleDigits(index, line):
         number = ""
+
         while index < len(line) and line[index] != " ":
-    
             number += line[index]
             index += 1
     
         return [number, index]
+
 
     #get and store each number from the current preference line
     def getLineValues(currentLine):
@@ -34,7 +33,7 @@ def run_matching(verbose = True):
     
         while i < len(currentLine):
             if (currentLine[i] != " " and i + 1 < len(currentLine) and currentLine[i + 1] != " "):
-                numberVal = largeNumber(i, currentLine)
+                numberVal = multipleDigits(i, currentLine)
                 values.append(int(numberVal[0]))
     
                 i = numberVal[1]
@@ -44,8 +43,9 @@ def run_matching(verbose = True):
                 i += 1
     
             i += 1
-    
+
         return values
+
 
     #set and update the hospital dictionary
     def setHospitals(currentLine, hospitalIndex):
@@ -54,6 +54,7 @@ def run_matching(verbose = True):
         #store preference list for each hospital
         hospitals[hospitalIndex] = hospitalPreferenceList
         hospitalsCheck[hospitalIndex] = list(hospitalPreferenceList)
+
 
     #set and update student dictionary
     def setStudents(currentLine, studentIndex):
@@ -75,12 +76,14 @@ def run_matching(verbose = True):
 
         return False
 
+
     def checkHospitalPreferenceList(preferenceList):
 
         #check if preference list empty --> no more possible candidates
         if not preferenceList:
             return False
         return True
+
 
     #check if student already paired
     def checkStudentPaired(student):
@@ -91,13 +94,14 @@ def run_matching(verbose = True):
 
         return False
 
+
     #get paired hospital value from pairs list
     def getPairedHospital(student):
 
         for pair in pairs:
             if (pair[1] == student):
-                # print("paired hospital value: " , pair[0])
                 return pair[0]
+
 
     #get the index of a hospital in a student preference list
     def getHospitalIndex(hospital, student):
@@ -109,6 +113,7 @@ def run_matching(verbose = True):
                 return index
             index += 1
 
+
     def getPairIndex(hospital, student):
         index = 0
         for pair in pairs:
@@ -116,26 +121,23 @@ def run_matching(verbose = True):
                 return index
             index += 1
 
+
     #check if student prefers hospital it is paired with or current hospital
     def changeHospital(student, currentHospital):
         pariedHosptial = getPairedHospital(student)
         pairedHospitalIndex = getHospitalIndex(pariedHosptial, student)
         currentHospitalIndex = getHospitalIndex(currentHospital, student)
 
-        # print("paired hospital index val: " , pairedHospitalIndex)
-        # print("current hospital index val: ", currentHospitalIndex)
 
         #current hospital has higher preference than hospital student is paired with
         if(currentHospitalIndex < pairedHospitalIndex):
             pairedIndex = getPairIndex(pariedHosptial, student)
-            # print("paired hospital index val: ", pairedIndex)
-            # print("PAIR REMOVED")
             pairs.pop(pairedIndex) #remove previously paired hospital from list
-            # print("pairs after removal: ", pairs)
             return True
 
         else:
             return False
+
 
     #check number of pairs in list
     def checkPairSize(pairs):
@@ -145,6 +147,7 @@ def run_matching(verbose = True):
 
         else:
             return False
+
 
     #get values of student and hospital preference lists
     with open("test-files/example1.in") as file:
@@ -158,17 +161,18 @@ def run_matching(verbose = True):
                 strippedLine  = line.rstrip()
 
                 #check line index
-                if index <= halfLines:
+                if fileLinesIndex <= halfLines:
                     setHospitals(strippedLine, hospitalIndex)
-                    index += 1
+                    fileLinesIndex += 1
                     hospitalIndex += 1
 
                 else:
                     setStudents(strippedLine, studentIndex)
-                    index += 1
+                    fileLinesIndex += 1
                     studentIndex += 1
 
             lineIndex += 1
+
 
     #gale-shapley implementation
     while checkPairSize(pairs) and checkHospitalPreferenceList(hospitals.get(currentHospital)):
@@ -178,11 +182,9 @@ def run_matching(verbose = True):
             currentHospital += 1
             continue
 
-
         #get hospital preference list and set student value
         preferenceList = hospitals.get(currentHospital)
         student = preferenceList[0]
-
 
         #student is not paired
         if not(checkStudentPaired(student)):
@@ -195,10 +197,8 @@ def run_matching(verbose = True):
             pairs.append([currentHospital, student])
             preferenceList.pop(0)
 
-
-        #student paired but hospital rejected: remove student from hospital preference list
+        #student paired and hospital rejected: remove student from preference list
         else:
-
             preferenceList.pop(0)
 
         currentHospital += 1
@@ -207,16 +207,12 @@ def run_matching(verbose = True):
         if currentHospital > int(n):
             currentHospital = 1
 
+
     def printSolution(pairs):
 
         for pair in pairs:
             print(pair[0], "", pair[1])
 
-        # stability = check_validity(int(n), pairs)
-        stability = validity_check.check_stability(int(n),pairs,hospitalsCheck, students)
-        print("stability status: ", stability[1])
-
-    # print("HOSPITALS", hospitals)
     if verbose:
         printSolution(pairs)
     return pairs, hospitalsCheck, students, int(n)
