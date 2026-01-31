@@ -44,4 +44,4 @@ for n in sizes:
     total = end-start
     verify_times.append(total)
 
-    print(f"n={n}, {match_times[-1]:.6f}, {verify_times[-1]:.6f}")
+    print(f"n={n}, {match_times[-1]:.10f}, {verify_times[-1]:.10f}")

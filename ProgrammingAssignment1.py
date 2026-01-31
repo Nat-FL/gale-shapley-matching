@@ -1,4 +1,4 @@
-def run_matching():
+def run_matching(verbose = True):
     import math
     import validity_check
     hospitals = {}
@@ -218,5 +218,7 @@ def run_matching():
 
     # print("HOSPITALS", hospitals)
     printSolution(pairs)
+    return pairs, hospitalsCheck, students, int(n)
+
 
 run_matching()
