@@ -26,6 +26,7 @@ python ProgrammingAssignment1.py example1.in
 The verifier is implemented in `validity_check.py` as helper functions that
 check the validity and stability of the produced matching.
 These checks are executed automatically when the matcher is run.
+To test the verifier independently from the matcher update and run the verifier_test.py file
 
 
 ## Assumptions
@@ -46,6 +47,7 @@ Python 3 is used for execution.
 1 1
 2 2
 
+### Gale-Shapley Runtime Graph
 
 
 
