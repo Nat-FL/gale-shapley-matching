@@ -1,10 +1,14 @@
 from matplotlib import pyplot as graph
+from Runtime import run_experiment
 
-n = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512] #students/hospitals
-time = [.0009, .00086, .0009, 8, 16, 32, 64, 128, 256, 512] #program running time
+n, match_times, verify_times = run_experiment()
 
-graph.plot(n, time)
+graph.plot(n, match_times, label="Matching")
+graph.plot(n, verify_times, label="Verifier")
+
 graph.title("Gale-Shapley Running Time")
 graph.ylabel("Time (s)")
 graph.xlabel("N (students/hospitals)")
+graph.legend()
+
 graph.show()

@@ -217,7 +217,8 @@ def run_matching(verbose = True):
         print("stability status: ", stability[1])
 
     # print("HOSPITALS", hospitals)
-    printSolution(pairs)
+    if verbose:
+        printSolution(pairs)
     return pairs, hospitalsCheck, students, int(n)
 
 

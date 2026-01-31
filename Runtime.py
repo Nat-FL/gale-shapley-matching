@@ -29,19 +29,27 @@ sizes = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
 match_times = []
 verify_times = []
 
-for n in sizes:
-    generate_input(n)
 
-    start = time.perf_counter()
-    pairs, hospitals, students, n_val = run_matching()
-    end = time.perf_counter()
-    total = end-start 
-    match_times.append(total)
+def run_experiment():
+    sizes = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+    match_times = []
+    verify_times = []
 
-    start = time.perf_counter()
-    validity_check.check_stability(n_val, pairs, hospitals, students)
-    end = time.perf_counter()
-    total = end-start
-    verify_times.append(total)
+    for n in sizes:
+        generate_input(n)
 
-    print(f"n={n}, {match_times[-1]:.10f}, {verify_times[-1]:.10f}")
+        start = time.perf_counter()
+        pairs, hospitals, students, n_val = run_matching(verbose=False)
+        end = time.perf_counter()
+        match_times.append(end - start)
+
+        start = time.perf_counter()
+        validity_check.check_stability(n_val, pairs, hospitals, students)
+        end = time.perf_counter()
+        verify_times.append(end - start)
+
+    return sizes, match_times, verify_times
+
+
+if __name__ == "__main__":
+    run_experiment()
