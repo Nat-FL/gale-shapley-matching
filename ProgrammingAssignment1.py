@@ -15,8 +15,6 @@ def run_matching():
     currentHospital = 1 #current hospital index
 
     numLines = sum(1 for line in open("exampleData.txt")) #read in number of lines
-    print(numLines)
-
     halfLines = math.ceil((numLines-2) / 2)
 
 
@@ -26,12 +24,10 @@ def run_matching():
 
         for element in currentLine:
             if (element != " "):
-                print("ELEMENTS: ", element)
                 values.append(int(element))
 
         hospitals[hospitalIndex] = values
         hospitalsCheck[hospitalIndex] = list(values)
-        print("hospitalsCheck: ", hospitalsCheck)
 
     #set and update student dictionary with n students and preference list of each student
     def setStudents(currentLine, studentIndex):
@@ -151,7 +147,6 @@ def run_matching():
 
             lineIndex += 1
 
-    print("HOSPITALS", hospitals)
     #gale-shapley implementation
     while checkPairSize(pairs) and checkHospitalPreferenceList(hospitals.get(currentHospital)):
 
@@ -194,13 +189,11 @@ def run_matching():
         for pair in pairs:
             print(pair[0], "", pair[1])
 
-        print("hospital check: ", hospitalsCheck)
         # stability = check_validity(int(n), pairs)
         stability = validity_check.check_stability(int(n),pairs,hospitalsCheck, students)
-        print("stability status: ", stability)
+        print("stability status: ", stability[1])
 
     # print("HOSPITALS", hospitals)
-    print("STUDENTS", students)
     printSolution(pairs)
 
 run_matching()
