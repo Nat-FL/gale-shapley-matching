@@ -1,3 +1,4 @@
+import verifier_test
 
 def check_validity(n, matching):
     if len(matching) > n:
@@ -80,4 +81,8 @@ def check_stability(n, matchings, hospital_prefs, student_prefs):
 
     return (True, "VALID STABLE")
 
+def printStatement():
+    stability = check_stability(int(verifier_test.n), verifier_test.matchings, verifier_test.hospital_prefs, verifier_test.student_prefs)
+    print(stability[1])
 
+printStatement()

@@ -210,5 +210,8 @@ def printSolution(pairs):
     #stability = validity_check.check_stability(int(n),pairs,hospitalsCheck, students)
     #print(stability[1])
 
+print("hospital: ", hospitalsCheck)
+print("student: ", students)
+print("pairs: ", pairs)
 printSolution(pairs)
 print("--- %s seconds ---" % (time.time() - start_time))
